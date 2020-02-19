@@ -10,7 +10,7 @@ COBY.var("webcammer", function() {
         uid;
 
     var socket = new COBY.CobySocket({
-        url: "ws://yaakovcam.herokuapp.com/",
+        url: "wss://yaakovcam.herokuapp.com/",
         onmessage(d) {
        //     console.log("gotMSg",d.data);
             
