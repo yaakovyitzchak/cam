@@ -1,3 +1,0 @@
-console.log(`
-	asdihufhbanukighwiojffu2o3hjweiokijo
-`)

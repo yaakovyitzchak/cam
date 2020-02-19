@@ -139,29 +139,44 @@ COBY.var("webcammer", function() {
         perific(true);
     };
 
-    navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+    var func;
+    func = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
     window.RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate || window.webkitRTCIceCandidate;
     window.RTCSessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription || window.webkitRTCSessionDescription;
-    
-    if(navigator.getUserMedia) {
-        navigator.getUserMedia(
-            {
-                video: true,
-                audio: true,
-                noiseSuppresion: true
-            },
-            stream => {
-                console.log("hi",stream)
-                lStream = stream;
-                localV.srcObject = (
-                    lStream
-                );
-            },
-            error => {
-                console.log(error);
-            }
-        )
+    var opts = {
+        video: true,
+        audio: true,
+        noiseSuppresion: true
+    },
+    str = stream => {
+        console.log("hi",stream)
+        lStream = stream;
+        localV.srcObject = (
+            lStream
+        );
+    },
+    er = error => {
+        console.log(error);
+    };
+    if(func) {
+        func(
+            opts,
+            str, 
+            er
+        );
+    } else if(
+        navigator.mediaDevices &&
+        navigator.mediaDevices.getUserMedia
+    ) {
+        (navigator.mediaDevices.getUserMedia)(
+            opts,
+            str,
+            er
+        );
+    } else {
+        alert("WebRTC isn't supported man!!");
     }
+
 
 });
