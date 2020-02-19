@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script src="atzmus.js"></script>
+    </head>
+    <body>
+        <script>
+            COBY.go({
+                scripts: [
+                    "webcammer.js"
+                ],
+                elements: {
+                    innerHTML: "lol",
+                    elements: [
+                        {
+                            tag: "video",
+                            id:"localV",
+                            autoplay:"true",
+                            muted: true
+                        },
+                        {
+                            tag:"video",
+                            id:"remoteV",
+                            autoplay:"true"
+                        }, "<br />",
+                        {
+                            tag: "button",
+                            id:"camerify",
+                            innerHTML: "Camerify (something?)",
+                            onclick() {
+                                COBY.var("webcammer")
+                                .start();
+                            }
+                        },
+                        {
+                            tag: "button",
+                            innerHTML: "start peering",
+                            onclick() {
+                                COBY
+                                .var("webcammer")
+                                .peerify();
+                            }
+                        }
+                    ]
+                }
+            });
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<body>
+<script src="./atzmus.js"></script>
+<script>
+var a;
+COBY.go({
+	scripts: [
+		"./databasic.js"
+	],
+	loaded() {
+		COBY.var("databasic").start({
+			server:"ws://localhost:771",
+			username:"admin",
+			password:"adminPassword0.245806727940842161575344481989"
+		});
+	}
+})
+</script>
+</body>

@@ -1,0 +1,108 @@
+<html>
+<body>
+<script src="atzmus.js"></script>
+<script>
+var ctx;
+"עֲֳִֵֶ"
+COBY.go({
+	elements: {
+		id:"container",
+		elements: [
+			{
+				tag:"textarea",
+				style: {
+					float:"left"
+				},
+				"onchange onkeyup onkeydown": e => {
+					
+					var chart = " 	qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-=`!@#$%^&*()_+~[]\\;',./{}|:\"<>?קראטוןםפףךלחיעכגדשזסבהנמצתץ"
+					ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+					var str = e.target.value;
+					var red = 0,
+						green = 0,
+						blue = 0.
+						alpha = 0;
+					function toHex(r,g,b) {
+						var rez = "#";
+						var rd = r.toString(16);
+						var gr = g.toString(16);
+						var bl = b.toString(16);
+						if(rd.length < 2) rd = "0" + rd;
+						if(gr.length < 2) gr = "0" + gr;
+						if(bl.length < 2) bl = "0" + bl;
+						rez += rd + gr + bl
+						return rez
+					}
+					var pixels = str.split("")
+						
+						.map(x => chart.indexOf(x))
+						.map((x,i, arr) => {
+							var red = arr[i],
+								green = i < arr.length - 1 ? arr[i+1] : 0,
+								blue = i < arr.length - 2 ? arr[i+2] : 0,
+								alpha = i < arr.length - 3 ? arr[i+3] : 0
+							 return ({
+								red: red,
+								blue:blue,
+								green:green,
+								alpha:alpha
+							}) 
+							
+						}).filter((x, i, y) => i % 4 == 0)
+					
+					console.log(pixels.length)
+					ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+					ctx.canvas.width = pixels.length
+					var imageData = new ImageData(pixels.length || 1, 1);
+					for(var i = 0; i < pixels.length; i++) {
+						var pixel = pixels[i]
+						if(pixel) {
+							imageData.data[4 * i] = pixel.red;
+							imageData.data[4 * i + 1] = pixel.green;
+							imageData.data[4 *i + 2] = pixel.blue;
+							imageData.data[4* i + 3] = pixel.alpha;
+						} 
+						console.log(pixel)
+					}/*
+					pixels.forEach((x, i) => {
+						var s = toHex(x.red, x.green, x.blue);
+						ctx.fillStyle = s;
+					
+						ctx.fillRect(i,0,1,1);
+					})*/
+					ctx.putImageData(imageData, 0, 0)
+					console.log(imageData)
+					
+					if(false){
+						var index = chart.indexOf(str[i]);
+						if(index > -1) {
+						
+							red = index % 4 == 0 ? index : red;
+							green = index % 4 == 1 ? index : green;
+							blue = index % 4 == 2 ? index : blue;
+							alpha = index % 4 == 3 ? (index / 255) : alpha;
+							var fs = toHex(red, green, blue);
+							ctx.fillStyle = fs
+							
+							ctx.fillRect(i,0,1,1)
+							console.log(fs, index, red, green, blue, alpha)
+						}
+					}
+				}
+			},
+			{
+				tag:"canvas",
+				
+				added(z) {
+					if(z && z.el) {
+						z.el.height = 1;
+						ctx = z.el.getContext("2d")
+					}
+				}
+			}
+		]
+	}
+});
+</script>
+</body>
+</html>

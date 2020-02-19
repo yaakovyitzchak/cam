@@ -1,0 +1,18 @@
+<body>
+hi
+<script id="ok" type="javascript/worker">
+
+</script>
+<script>
+var b = new Blob([`
+	onmessage = function(e) {
+		console.log("HI There", e, e.data)
+	}
+`])
+
+var u = URL.createObjectURL(b);
+var w = new Worker(u);
+w.onmessage = m => console.log(m);
+w.postMessage("hi there")
+</script>
+</body>
