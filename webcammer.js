@@ -170,10 +170,10 @@ COBY.var("webcammer", function() {
         navigator.mediaDevices.getUserMedia
     ) {
         (navigator.mediaDevices.getUserMedia)(
-            opts,
-            str,
-            er
-        );
+            opts
+        )
+        .then(str)
+        .catch(er);
     } else {
         alert("WebRTC isn't supported man!!");
     }
