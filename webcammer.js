@@ -1,8 +1,8 @@
 COBY.var("webcammer", function() {
     var config = {
         'iceServers': [
-            {'url': 'stun:stun.services.mozilla.com'}, 
-            {'url': 'stun:stun.l.google.com:19302'}
+            {'urls': 'stun:stun.services.mozilla.com'}, 
+            {'urls': 'stun:stun.l.google.com:19302'}
         ]
     },
         lStream,
