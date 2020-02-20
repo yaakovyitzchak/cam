@@ -160,7 +160,7 @@ COBY.var("webcammer", function() {
         console.log(error);
     };
     if(func) {
-        func(
+        func.call(navigator,
             opts,
             str, 
             er
